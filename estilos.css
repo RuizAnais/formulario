@@ -1,0 +1,81 @@
+.ocultar {
+    display: none;
+} 
+
+h2 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 13px;
+    margin-bottom: 30px;
+    color: white;
+}
+.mostrar {
+    display: block;
+    
+}
+#t {
+    color:black
+}
+
+#bor{
+    border-width: 2px;
+    border-style:solid;
+    border-color: white;
+    border-radius: 20px;
+}
+
+#formulario {
+    background-color: rgb(0, 0, 0);
+    padding: 10px;
+    width: 230px;
+    height: 530px;
+    text-align: center;
+    margin: auto;
+    border-radius: 20px;
+    box-shadow: 2px 2px 15px rgb(32, 30, 31);
+    border-style:dotted;
+    border-color: white;
+}
+
+#passwordRegistrate {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#btnRegistrar, #btnIniciarSesion {
+    background-color: rgb(3, 7, 255);
+    color: white;
+    box-shadow: 3px 3px 5px rgb(114, 114, 116);
+    margin: 5px;
+    border-radius: 4px;
+    height: 28px;
+}
+#btnRegistrar:hover, #btnIniciarSesion:hover, #btnCerrarSesion:hover{
+    background-color: rgb(255, 247, 134);
+    color: black;
+}
+
+#btnRegistrar:active, #btnIniciarSesion:active, #btnCerrarSesion:active{
+    transform: scale(0.5);
+}
+
+#btngoogle {
+    margin-right: 30px;
+    padding-bottom: 25px;
+
+}
+#btnfacebook {
+    margin-left: 30px;
+    padding-bottom: 25px;
+}
+#u {
+    margin-bottom: 25px;
+}
+
+#btnCerrarSesion{
+    background-color: blue;
+    color: white;
+    height: 28px;
+    border-radius: 5px;
+}
+
+

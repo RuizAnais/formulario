@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css" class="rel">
+    <title>Document</title>
+
+</head>
+<body>
+    <form action="" id="formulario" class="mostrar">
+        <div id="bor">
+        <h2>Identificate</h2>
+        <img id="u" src="img/u2.png" alt="user" height="150px" width="150px">
+        <br><br>
+        <input type="email"  placeholder="Escribe tu email" id="emailRegistrate">
+        <br><br>
+        <input type="password" placeholder="Escribe tu password" id="passwordRegistrate">
+        <br><br>
+        <input type="button" value="Registrar" id="btnRegistrar">
+        <input type="button" value="Iniciar Sesión" id="btnIniciarSesion">
+        <br><br>
+        <img id="btngoogle" src="img/gloglee.png" alt="google" height="40px" width="40px">
+        <img id="btnfacebook" src="img/fabu.png" alt="facebook" height="40px" width="40px">
+        </div>
+    </form>
+
+    <div class="container ocultar" id="contenidoDeLaWeb">
+       <h2 id="t">Bienvenid@ al contenido de mi Web</h2>
+       <p style="color: rgb(225, 0, 255);">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus libero, provident eveniet repudiandae laudantium aspernatur sit fugit dolor dolores exercitationem perspiciatis vero aliquam. Dignissimos voluptates porro quisquam id. Consectetur, expedita. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab obcaecati voluptatibus voluptatem, mollitia, facilis quae saepe quam maxime at placeat optio voluptate consectetur excepturi ex! Cum quo quasi iusto dolores?</p>
+       <input type="button" value="Cerrar Sesión" id="btnCerrarSesion">
+    </div>
+
+    <!-- Insertar el link de Firebase -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    
+    <script type="module">
+        const firebaseConfig = {
+          apiKey: "AIzaSyADuHLoZ1Y8FkgaU1WkghGrtDmdzQM_LNc",
+          authDomain: "paginaweb1-37ad1.firebaseapp.com",
+          projectId: "paginaweb1-37ad1",
+          storageBucket: "paginaweb1-37ad1.appspot.com",
+          messagingSenderId: "523681928489",
+          appId: "1:523681928489:web:c70263ea003d2e004f5338"
+        }; 
+      
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig); 
+        const auth = firebase.auth();
+
+        //llamando al Dom o al HTML
+
+        const btnRegistrar = document.getElementById('btnRegistrar');
+        const btnIniciarSesion = document.getElementById('btnIniciarSesion');
+        const formulario = document.getElementById('formulario');
+        const contenidoDeLaWeb = document.getElementById('contenidoDeLaWeb');
+        const btngoogle = document.getElementById('btngoogle');
+        const btnfacebook =document.getElementById('btnfacebook');
+
+
+        btnRegistrar.addEventListener('click', ()=> {
+            let email = document.getElementById('emailRegistrate').value;
+            let password = document.getElementById('passwordRegistrate').value;
+
+         //   console.log("Hola");
+          //  console.log(email);
+          //  console.log(password);
+        
+        
+
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Signed in
+        var user = userCredential.user;
+        console.log("Inicio de sesión correcto");
+        formulario.classList.replace('mostrar','ocultar');
+        contenidoDeLaWeb.classList.replace('ocultar','mostrar'); 
+
+        // ...
+        })
+        .catch((error) => {
+       var errorCode = error.code;
+       var errorMessage = error.message;
+       alert(errorMessage);
+       console.log(errorMessage);
+       // ..
+       });
+    })
+        //Función Iniciar sesión
+        btnIniciarSesion.addEventListener('click',()=>{ //le digo que funcione cuando le de click
+            let email = document.getElementById('emailRegistrate').value;
+            let password = document.getElementById('passwordRegistrate').value;
+            
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+            // Signed in
+            var user = userCredential.user;
+            
+            formulario.classList.replace('mostrar','ocultar');  //el formulario se oculta
+            contenidoDeLaWeb.classList.replace('ocultar','mostrar'); //y el contenido se ve
+            })
+            .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage);
+            console.log(errorMessage);
+    });
+})
+
+        //Función Cerrar Sesión
+        btnCerrarSesion.addEventListener('click',()=>{ //le digo que funcione cuando le de click
+            firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+            console.log("Ha cerrado sesión correctamente");
+            contenidoDeLaWeb.classList.replace('mostrar','ocultar'); 
+            formulario.classList.replace('ocultar','mostrar');
+            }).catch((error) => {
+            // An error happened.
+            });     
+})
+
+        //Función Autenticar Estado
+        //estado activo o inactivo
+
+        firebase.auth().onAuthStateChanged((user) => {
+         if (user) {
+            formulario.classList.replace('mostrar','ocultar');
+            contenidoDeLaWeb.classList.replace('ocultar','mostrar'); 
+         var uid = user.uid;
+         // ...
+         } else {
+         // User is signed out
+            formulario.classList.replace('ocultar','mostrar');
+            contenidoDeLaWeb.classList.replace('mostrar','ocultar'); 
+         // ...
+         }
+});
+       
+ 
+
+
+      </script>
+
+</body>
+</html>
